@@ -1,0 +1,112 @@
+Full command list: 111 commands
+help: Show the help
+listcommands: Lists all commands
+airplane.getstate: Retrieves the full airplane state
+airplane.getenginesstate: Retrieves the full airplane engines state
+airplane.getfuelstate: Retrieves the full airplane engines state
+airplane.getinfo: Retrieves the full airplane info
+airplane.getlightsstate: Retrieves the full airplane lights state
+airplane.setlightsstate: Set lights statestate
+camera.virtualcockpit.setviewangle: Set the camera view angle (Radians)
+camera.virtualcockpit.getviewangle: Get the camera view angle (Radians)
+camera.virtualcockpit.resetviewangle: Disabled the view angle override
+camera.getinfo: Get camera info
+va: Set the camera view angle (Radians) (Shortcut)
+ga: Get the camera view angle (Radians) (Shortcut)
+rv: Disabled the view angle override (Shortcut)
+gv: Get camera info (Shortcut)
+autopilot.getstate: Retrieves the AP State
+infiniteflight.getstatus: Get the status of the application
+infiniteflight.getnearestairports: Get a list of the nearest airports
+networkjoystick.setaxisvalue: Lists all commands
+networkjoystick.setbuttonstate: Lists all commands
+networkjoystick.setpovstate: Lists all commands
+networkjoystick.setnetworkjoystickaxes: Sets all the flight control axes to \"Network Joystick\".
+live.getweather: Lists all commands
+live.gettraffic: Lists all commands
+live.atcfacilities: Lists all commands
+live.getcurrentcomfrequencies: Lists all commands
+live.tunetofrequency: Lists all commands
+live.enableatcmessagelistupdated: Lists all commands
+flightplan.get: Gets the Flight Plan Info
+flightplan.load: Gets the Flight Plan Info
+commands.elevatortrimup: Elevator Trim Up
+commands.elevatortrimdown: Elevator Trim Down
+commands.throttleupcommand: Throttle Up
+commands.throttledowncommand: Throttle Down
+commands.setthrottlecommand: Set Throttle Value
+commands.setcockpitcamera: Cockpit Camera
+commands.setvirtualcockpitcameracommand: Virtual Cockpit Camera
+commands.setfollowcameracommand: Follow Camera
+commands.setflybycamera: Fly By Camera
+commands.setonboardcameracommand: Onboard Camera
+commands.settowercameracommand: Tower Camera
+commands.nextcamera: Next Camera
+commands.prevcamera: Previous Camera
+commands.cameramoveleft: Move Camera Left
+commands.cameramoveright: Move Camera Right
+commands.cameramovedown: Move Camera Down
+commands.cameramoveup: Move Camera Up
+commands.cameramovehorizontal: Move Camera Left/Right
+commands.cameramovevertical: Move Camera Up/Down
+commands.camerazoomin: Zoom In
+commands.camerazoomout: Zoom Out
+commands.showatcwindowcommand: Toggle ATC Window
+commands.atcentry1: Select ATC Entry 1
+commands.atcentry2: Select ATC Entry 2
+commands.atcentry3: Select ATC Entry 3
+commands.atcentry4: Select ATC Entry 4
+commands.atcentry5: Select ATC Entry 5
+commands.atcentry6: Select ATC Entry 6
+commands.atcentry7: Select ATC Entry 7
+commands.atcentry8: Select ATC Entry 8
+commands.atcentry9: Select ATC Entry 9
+commands.atcentry10: Select ATC Entry 10
+commands.live.setcomfrequencies: SetCOMFrequencies
+commands.flightplan.addwaypoints:
+commands.flightplan.clear:
+commands.flightplan.activateleg:
+commands.brakes: Brakes
+commands.parkingbrakes: Parking Brakes
+commands.flapsdown: Flaps Down (1 Step)
+commands.flapsup: Flaps Up (1 Step)
+commands.flapsfulldown: Flaps Down (Full)
+commands.flapsfullup: Flaps Up (Full)
+commands.aircraft.setflapstate:
+commands.spoilers: Toggle Spoilers
+commands.landinggear: Landing Gear
+commands.pushback: Pushback
+commands.fueldump: Fuel Dump
+commands.reversethrust: ReverseThrust
+commands.landinglights: Landing Lights
+commands.taxilights: Taxi Lights
+commands.strobelights: Strobes
+commands.beaconlights: Beacon Lights
+commands.navlights: Navigation Lights
+commands.setlandinglightsstate:
+commands.settaxilightsstate:
+commands.setstrobelightsstate:
+commands.setbeaconlightsstate:
+commands.setnavlightsstate:
+commands.autopilot.toggle: Engage/Disengage Autopilot
+commands.autopilot.setstate: SetState
+commands.autopilot.setheading: SetHeading
+commands.autopilot.setaltitude: SetAltitude
+commands.autopilot.setvs: SetVS
+commands.autopilot.setspeed: SetSpeed
+commands.autopilot.setheadingstate: SetHeadingState
+commands.autopilot.setaltitudestate: SetAltitudeState
+commands.autopilot.setvsstate: SetVSState
+commands.autopilot.setspeedstate: SetSpeedState
+commands.autopilot.setapproachmodestate: SetApproachModeState
+commands.autopilot.setlnavapproachmodestate: SetLNavModeState
+commands.togglehud: Toggle HUD
+commands.autostart: Auto Start Engine(s)
+commands.togglepause: Pause
+commands.engine.start: Start Specified Engine
+commands.engine.stop: Stop Specified Engine
+a+: Increase altitude 1,000ft
+a++: Increase altitude 10,000ft
+recenter: Recenter World
+fpl.add: Add Flight Plan Item
+infiniteflight.state: Increase altitude 10,000ft
