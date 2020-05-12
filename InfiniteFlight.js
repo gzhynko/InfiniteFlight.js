@@ -9,8 +9,8 @@ exports.init = function (success, error) {
       var response = JSON.parse(msg.toString());
       if (response.Addresses[1] && response.Port) {
         _addr = response.Addresses[1];
-        _port = response.Port;
-        console.log("Connected to Infinite Flight at " + _addr + ':' + _port);
+        _port = 10111;
+        console.log("Connected to Infinite Flight at " + _addr + ':' + 10111);
         s.close();
         client = new net.Socket();
         success();
