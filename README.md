@@ -15,6 +15,10 @@ To listen for response messages from Infinite Flight, call `InfiniteFlight.onMes
 
 To send a command to Infinite Flight call `InfiniteFlight.sendCmd(command, params)`. Command should be a command found in the list of commands found in commands.txt and params should be an array container an object of any necessary parameters. For commands that do not require parameters, this must be set to a blank array - `[]`.
 
+### Example
+
+A very simple example showing all features is available in the example folder.
+
 ## Contributing
 
 I welcome any contributions to improve this service. Simply fork, change and open a PR. This code is licensed under the GNU GPLv3 License. Bug reports are welcome through the issues feature.
