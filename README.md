@@ -19,6 +19,11 @@ To send a command to Infinite Flight call `InfiniteFlight.sendCmd(command, param
 
 A very simple example showing all features is available in the example folder.
 
+### Requirements
+
+- Node.js `dgram` module
+- Node.js `net` module
+
 ## Contributing
 
 I welcome any contributions to improve this service. Simply fork, change and open a PR. This code is licensed under the GNU GPLv3 License. Bug reports are welcome through the issues feature.
