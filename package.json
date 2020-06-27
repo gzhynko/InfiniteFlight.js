@@ -1,6 +1,6 @@
 {
   "name": "infiniteflightjs",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A JavaScript Module for V1 of the Infinite Flight Connect API",
   "main": "InfiniteFlight.js",
   "directories": {
