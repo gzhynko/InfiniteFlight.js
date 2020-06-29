@@ -1,11 +1,9 @@
 const InfiniteFlight = require('../InfiniteFlight');
 
 InfiniteFlight.init(function() {
-    InfiniteFlight.onMessage(function(msg) {
-        console.log(msg);
-    });
-    console.log(InfiniteFlight.sendCmd('Commands.FlapsFullDown', []));
-    console.log(InfiniteFlight.sendCmd('Commands.ParkingBrakes', []));
+    InfiniteFlight.writeInt(1048616);
+    InfiniteFlight.writeBool(false);
+    console.log("Written");
 }, function() {
     throw new Error('Error Connecting to Infinite Flight');
 });
