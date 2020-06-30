@@ -9,14 +9,13 @@ exports.init = function (success, error) {
       var response = JSON.parse(msg.toString());
       if (response.Addresses[1] && response.Port) {
         _addr = response.Addresses[1];
-        _port = 10111;
+        _port = 10112;
         s.close();
         client = new net.Socket();
         client.connect(parseInt(_port), _addr);
-        console.log("Connected to Infinite Flight at " + _addr + ':' + 10111);
+        console.log("Connected to Infinite Flight at " + _addr + ':' + 10112);
         client.on('data', function(chunk) {
-          exports.messages.push(chunk.toJSON());
-          console.log(chunk.toJSON());
+          exports.messages.push(chunk);
         });
         success();
       }
@@ -36,7 +35,7 @@ exports.writeBool = function (cmd) {
 }
 
 exports.writeInt = function (cmd) {
-  var data = Buffer.allocUnsafe(1);
+  var data = Buffer.allocUnsafe(4);
   data.writeInt32LE(cmd);
   client.write(data);
 }
