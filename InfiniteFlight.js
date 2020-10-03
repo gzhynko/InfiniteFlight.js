@@ -135,6 +135,23 @@ class IFTCPClient {
     return String.fromCharCode.apply(null, new Uint8Array(val));
   }
 
+  parseResponseByType(val, type) {
+    switch(type) {
+      case 0:
+        return this.readBool(val);
+      case 1:
+        return this.readInt(val);
+      case 2:
+        return this.readFloat(val);
+      case 3: 
+        return this.readDouble(val);
+      case 4:
+        return this.readString(val);
+      case 5:
+        throw new Error("Not Implemented");
+    }
+  }
+
   runCmd (commandID) {
     this.writeInt(commandID);
     this.writeBool(false);
