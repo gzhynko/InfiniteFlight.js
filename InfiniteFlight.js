@@ -1,6 +1,6 @@
 var dgram = require('dgram');
 var net = require('net');
-const {PromiseSocket} = require("promise-socket")
+const { PromiseSocket } = require("promise-socket");
 
 exports.init = function () {
   return new IFTCPClient();
@@ -18,9 +18,12 @@ class IFTCPClient {
     return this.client.connect(parseInt(port), ip);
   }
 
-  establishConnection (success, error, attempts) {
+  establishConnection (success, error, attempts, logStatus = false) {
     var s = dgram.createSocket('udp4');
     s.bind(15000);
+
+    if(logStatus)
+      console.log("Connecting to Infinite Flight...");
 
     s.on('message', function(msg) {
       var response = JSON.parse(msg.toString());
@@ -30,11 +33,28 @@ class IFTCPClient {
         this.port = 10112;
         s.close();
 
+        if(logStatus)
+          console.log("Found an Infinite Flight instance running on " + this.ipAddress + ". Establishing connection with it...");
+
+        var startTime = process.hrtime();
+
         this.connect(this.ipAddress, this.port).then(function(){
-          console.log("Connected to Infinite Flight at " + this.ipAddress + ':' + this.port);
+          if(logStatus) {
+            var endTime = process.hrtime(startTime);
+            var elapsedMilliseconds = (endTime[0]* 1000000000 + endTime[1]) / 1000000;
+            console.log("Connected to Infinite Flight at " + this.ipAddress + ":" + this.port + ". This took " + Math.round(elapsedMilliseconds) + "ms.");
+          }
+
+          success();
+          
           this.connected = true;
         }.bind(this)).catch((reason) => {
-          console.log("Connection rejected: " + reason);
+          if(logStatus)
+            console.log("Connection rejected: " + reason);
+          
+          error();
+
+          this.connected = false;
         });
       }
     }.bind(this));
@@ -130,7 +150,7 @@ class IFTCPClient {
 
     this.client.on('data', function(chunk) {
       callback(chunk);
-    })
+    });
   }
   
   onTimeout (callback) {
@@ -138,6 +158,6 @@ class IFTCPClient {
 
     this.client.on('timeout', function(){
       callback();
-    })
+    });
   }
 }
