@@ -9,23 +9,36 @@ tcpClient = InfiniteFlight.init();
 // If it goes well, go ahead and call the clientConnected function.
 // If not, throw a new error.
 tcpClient.establishConnection(function () {
-	clientConnected();
+  clientConnected();
 },
 function () {
-	throw new Error("Error connecting to Infinite Flight");
+  throw new Error("Error connecting to Infinite Flight");
 });
 
 function clientConnected(){
+  // Use this to get the command manifest
   tcpClient.writeInt(-1);
   tcpClient.writeBool(false);
-  console.log("Written");
+	
+  // , OR:
+  tcpClient.retrieveManifest();
 	
   // Set socket to timeout after 10 seconds of inactivity
   tcpClient.setSocketTimeout(1000 * 10);
+
+  // Log the response (represented here by 'chunk') client receives from server. 
+	tcpClient.onMessage(function(chunk) {
+    console.log(chunk);
+	});
 
   // Log "Socket timeout" when socket times out. 
   // Note that this does NOT close the socket connection.
   tcpClient.onTimeout(function() {
     console.log("Socket timeout");
+	});
+	
+	// Log "Socket disconnected" when socket connection closes. 
+  tcpClient.onDisconnect(function() {
+    console.log("Socket disconnected");
   });
 }
