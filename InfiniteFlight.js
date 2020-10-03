@@ -18,7 +18,7 @@ class IFTCPClient {
     return this.client.connect(parseInt(port), ip);
   }
 
-  establishConnection (success, error, attempts, logStatus = false) {
+  establishConnection (success, error, logStatus = false) {
     var s = dgram.createSocket('udp4');
     s.bind(15000);
 

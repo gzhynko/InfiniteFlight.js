@@ -13,18 +13,18 @@ tcpClient.establishConnection(function () {
 },
 function () {
 	throw new Error("Error connecting to Infinite Flight");
-}, 1);
+});
 
 function clientConnected(){
   tcpClient.writeInt(-1);
   tcpClient.writeBool(false);
   console.log("Written");
 	
-	// Set socket to timeout after 10 seconds of inactivity
+  // Set socket to timeout after 10 seconds of inactivity
   tcpClient.setSocketTimeout(1000 * 10);
 
-	// Log "Socket timeout" when socket times out. 
-	// Note that this does NOT close the socket connection.
+  // Log "Socket timeout" when socket times out. 
+  // Note that this does NOT close the socket connection.
   tcpClient.onTimeout(function() {
     console.log("Socket timeout");
   });
