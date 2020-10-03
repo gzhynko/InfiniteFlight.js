@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Velocity23/InfiniteFlight.js#readme",
   "dependencies": {
     "dgram": "^1.0.1",
-    "net": "^1.0.2"
+    "net": "^1.0.2",
+    "promise-socket": "^7.0.0"
   }
 }
