@@ -45,16 +45,16 @@ class IFTCPClient {
             console.log("Connected to Infinite Flight at " + this.ipAddress + ":" + this.port + ". This took " + Math.round(elapsedMilliseconds) + "ms.");
           }
 
-          success();
-          
           this.connected = true;
+
+          success();        
         }.bind(this)).catch((reason) => {
           if(logStatus)
             console.log("Connection rejected: " + reason);
           
-          error();
-
           this.connected = false;
+
+          error();
         });
       }
     }.bind(this));
@@ -132,14 +132,17 @@ class IFTCPClient {
   readString (val) {
     if(this.connected != true) return;
 
-    return val.toString();
+    return String.fromCharCode.apply(null, new Uint8Array(val));
   }
 
-  runCmd (command) {
-    writeInt(command);
-    writeBool(false);
+  runCmd (commandID) {
+    this.writeInt(commandID);
+    this.writeBool(false);
   }
-  
+
+  retrieveManifest () {
+    this.runCmd(-1);
+  }
   
   setSocketTimeout (timeout) {
     this.client.setTimeout(timeout);
@@ -148,7 +151,7 @@ class IFTCPClient {
   onMessage (callback) {
     if(this.connected != true) return;
 
-    this.client.on('data', function(chunk) {
+    this.client.stream.on('data', function(chunk) {
       callback(chunk);
     });
   }
@@ -156,7 +159,15 @@ class IFTCPClient {
   onTimeout (callback) {
     if(this.connected != true) return;
 
-    this.client.on('timeout', function(){
+    this.client.stream.on('timeout', function(){
+      callback();
+    });
+  }
+
+  onDisconnect (callback) {
+    if(this.connected != true) return;
+
+    this.client.stream.on('close', function(){
       callback();
     });
   }
