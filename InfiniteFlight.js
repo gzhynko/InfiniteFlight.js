@@ -8,7 +8,7 @@ exports.init = function () {
 
 class IFTCPClient {
   constructor () {
-    this.client = new PromiseSocket(new net.Socket()); 
+    this.client; 
     this.ipAddress = ""; 
     this.port = 0;
     this.connected = false;
@@ -38,10 +38,13 @@ class IFTCPClient {
 
         var startTime = process.hrtime();
 
+        this.client = new PromiseSocket(new net.Socket());
+
         this.connect(this.ipAddress, this.port).then(function(){
           if(logStatus) {
             var endTime = process.hrtime(startTime);
             var elapsedMilliseconds = (endTime[0]* 1000000000 + endTime[1]) / 1000000;
+            
             console.log("Connected to Infinite Flight at " + this.ipAddress + ":" + this.port + ". This took " + Math.round(elapsedMilliseconds) + "ms.");
           }
 
@@ -61,7 +64,7 @@ class IFTCPClient {
   }
 
   writeBool (val) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     if (val === true) {
       this.client.write(Buffer.from([1]));
@@ -71,7 +74,7 @@ class IFTCPClient {
   }
 
   writeInt (val) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     var data = Buffer.allocUnsafe(4);
     data.writeInt32LE(val);
@@ -79,7 +82,7 @@ class IFTCPClient {
   }
 
   writeFloat (val) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     var data = Buffer.allocUnsafe(4);
     data.writeFloatLE(val);
@@ -87,7 +90,7 @@ class IFTCPClient {
   }
 
   writeDouble (val) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     var data = Buffer.allocUnsafe(4);
     data.writeDoubleLE(val);
@@ -95,7 +98,7 @@ class IFTCPClient {
   }
 
   writeString (val) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     var data = new Uint8Array(val.length + 4);
     data[0] = val.length();
@@ -106,32 +109,22 @@ class IFTCPClient {
   }
 
   readBool (val) {
-    if(this.connected != true) return;
-
     return (val.toJSON() === true);
   }
 
   readInt (val) {
-    if(this.connected != true) return;
-
     return val.readInt32LE();
   }
 
   readFloat (val) {
-    if(this.connected != true) return;
-
     return val.readFloatLE();
   }
   
   readDouble (val) {
-    if(this.connected != true) return;
-
     return val.readDoubleLE();
   }
   
   readString (val) {
-    if(this.connected != true) return;
-
     return String.fromCharCode.apply(null, new Uint8Array(val));
   }
 
@@ -162,11 +155,13 @@ class IFTCPClient {
   }
   
   setSocketTimeout (timeout) {
+    if(!this.connected) return;
+
     this.client.setTimeout(timeout);
   }
   
   onMessage (callback) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     this.client.stream.on('data', function(chunk) {
       callback(chunk);
@@ -174,7 +169,7 @@ class IFTCPClient {
   }
   
   onTimeout (callback) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     this.client.stream.on('timeout', function(){
       callback();
@@ -182,10 +177,17 @@ class IFTCPClient {
   }
 
   onDisconnect (callback) {
-    if(this.connected != true) return;
+    if(!this.connected) return;
 
     this.client.stream.on('close', function(){
       callback();
     });
+  }
+
+  endConnection () {
+    if(!this.connected) return;
+
+    this.connected = false;
+    this.client.end();
   }
 }
