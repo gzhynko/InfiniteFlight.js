@@ -1,10 +1,15 @@
+
 # InfiniteFlight.js
- An Extremely Simple JavaScript Module for V1 of the Infinite Flight Connect API
+
+An Extremely Simple JavaScript Module for V1 of the Infinite Flight Connect API.
+
+*A module for V2 of the Infinite Flight Connect API can be found in the* [`v2`](https://github.com/Velocity23/InfiniteFlight.js/tree/v2) *branch*.
 
 ---
 
 ### Installation
 
+InfiniteFlight.js can be installed with npm:
 ```
 npm install infiniteflightjs -g
 ```
@@ -26,6 +31,7 @@ A very simple example showing all features is available in the example folder.
 ### Requirements
 
 - Node.js `dgram` module
+
 - Node.js `net` module
 
 ## Contributing
