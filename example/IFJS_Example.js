@@ -8,20 +8,15 @@ tcpClient = InfiniteFlight.init();
 // Try to establish connection with Infinite Flight.
 // If it goes well, go ahead and call the clientConnected function.
 // If not, throw a new error.
-tcpClient.establishConnection(function () {
-  clientConnected();
-},
-function () {
-  throw new Error("Error connecting to Infinite Flight");
-});
+tcpClient.establishConnection(() => clientConnected(), function () { throw new Error("Error connecting to Infinite Flight") }, true);
 
 function clientConnected(){
-  // Use this to get the command manifest
+  // You can use this to get the command manifest:
   tcpClient.writeInt(-1);
   tcpClient.writeBool(false);
 
-  // , OR:
-  tcpClient.retrieveManifest();
+  // , though the recommended way of doing that is:
+  tcpClient.retrieveManifest().then((manifest) => console.log(manifest));
 
   // Set socket to timeout after 10 seconds of inactivity
   tcpClient.setSocketTimeout(1000 * 10);

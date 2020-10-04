@@ -44,7 +44,6 @@ class IFTCPClient {
           if(logStatus) {
             var endTime = process.hrtime(startTime);
             var elapsedMilliseconds = (endTime[0]* 1000000000 + endTime[1]) / 1000000;
-            
             console.log("Connected to Infinite Flight at " + this.ipAddress + ":" + this.port + ". This took " + Math.round(elapsedMilliseconds) + "ms.");
           }
 
@@ -151,7 +150,17 @@ class IFTCPClient {
   }
 
   retrieveManifest () {
-    this.runCmd(-1);
+    return new Promise(function(resolve, reject) {
+      this.runCmd(-1);
+
+      this.client.stream.on('data', function(chunk) {
+        let data = this.parseResponseByType(chunk, 4);
+
+        // Make sure we got a csv string
+        if(data.indexOf(",") >= 0)
+          resolve(data);
+      }.bind(this));
+    }.bind(this));
   }
   
   setSocketTimeout (timeout) {
